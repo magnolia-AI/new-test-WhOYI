@@ -33,6 +33,7 @@ export default function Portfolio() {
       title: 'Dashboard Analytics Platform',
       description: 'A comprehensive analytics dashboard with real-time data visualization and reporting features.',
       image: '/images/project1.jpg',
+      video: '/videos/project1-animated.mp4',
       tags: ['React', 'D3.js', 'Node.js', 'MongoDB'],
       link: '#',
     },
@@ -41,6 +42,7 @@ export default function Portfolio() {
       title: 'Mobile Fitness App',
       description: 'A cross-platform mobile application for tracking workouts and nutrition with social features.',
       image: '/images/project2.jpg',
+      video: '/videos/project2-animated.mp4',
       tags: ['React Native', 'Firebase', 'Redux'],
       link: '#',
     },
@@ -49,6 +51,7 @@ export default function Portfolio() {
       title: 'E-commerce Solution',
       description: 'A full-featured online store with payment integration and inventory management.',
       image: '/images/project3.jpg',
+      video: '/videos/project3-animated.mp4',
       tags: ['Next.js', 'Stripe', 'PostgreSQL', 'Prisma'],
       link: '#',
     },
@@ -95,10 +98,16 @@ export default function Portfolio() {
                 ease: "easeInOut"
               }}
             >
-              <Avatar className="w-48 h-48 md:w-64 md:h-64">
-                <AvatarImage src="/images/profile.jpg" alt="Profile" />
-                <AvatarFallback>JD</AvatarFallback>
-              </Avatar>
+              <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden">
+                <video
+                  src="/videos/profile-animated.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </motion.div>
           </motion.div>
           <motion.div 
@@ -345,21 +354,47 @@ export default function Portfolio() {
                 >
                   <Card className="overflow-hidden h-full">
                     <div className="relative h-48">
-                      <Image 
-                        src={project.image} 
-                        alt={project.title} 
-                        fill
-                        className="object-cover"
+                      <video
+                        src={project.video}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
                       />
                     </div>
                     <CardContent className="p-6">
                       <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                       <p className="text-muted-foreground mb-4">{project.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <motion.div 
+                        className="flex flex-wrap gap-2 mb-4"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: 0.2 }}
+                      >
                         {project.tags.map((tag, index) => (
-                          <Badge key={index} variant="secondary">{tag}</Badge>
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ 
+                              duration: 0.3, 
+                              delay: 0.3 + index * 0.1,
+                              type: "spring",
+                              stiffness: 300,
+                              damping: 20
+                            }}
+                            whileHover={{ 
+                              y: -2,
+                              transition: { duration: 0.2 }
+                            }}
+                          >
+                            <Badge variant="secondary">{tag}</Badge>
+                          </motion.div>
                         ))}
-                      </div>
+                      </motion.div>
                       <Button variant="outline" className="w-full">
                         <ExternalLink className="mr-2 h-4 w-4" /> View Project
                       </Button>
@@ -488,6 +523,10 @@ export default function Portfolio() {
   )
 }
  
+
+
+
+
 
 
 

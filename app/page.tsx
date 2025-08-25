@@ -1,4 +1,5 @@
 'use client'
+<<<<<<< HEAD
 
 import { useState, useRef } from 'react'
 import Image from 'next/image'
@@ -518,10 +519,12 @@ export default function Portfolio() {
             </Card>
           </motion.div>
         </motion.div>
+
       </section>
     </div>
   )
 }
+<<<<<<< HEAD
  
 
 
@@ -535,4 +538,7 @@ export default function Portfolio() {
 
 
 
+
+=======
+>>>>>>> main
 
